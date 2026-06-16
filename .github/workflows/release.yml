@@ -44,7 +44,7 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ env.VERSION }}-${{ github.event.pull_request.number }}
-          name: Release v${{ env.VERSION }} (PR #${{ github.event.pull_request.number }})
+          name: Release v${{ env.VERSION }}
           body: |
             Automated release generated from merged Pull Request #${{ github.event.pull_request.number }}.
             
