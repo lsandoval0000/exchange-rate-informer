@@ -24,8 +24,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
-          
+      
       - name: Build Quarkus Application
+        run: mvn clean package
+        
+      - name: Package Release Assets
         run: |
           mkdir -p release-artifacts
           cp -r target/quarkus-app/* release-artifacts/
