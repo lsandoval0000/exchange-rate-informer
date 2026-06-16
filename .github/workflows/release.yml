@@ -43,5 +43,14 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
+          tag_name: v${{ env.VERSION }}-${{ github.event.pull_request.number }}
+          name: Release v${{ env.VERSION }} (PR #${{ github.event.pull_request.number }})
+          body: |
+            Automated release generated from merged Pull Request #${{ github.event.pull_request.number }}.
+            
+            **PR Title:** ${{ github.event.pull_request.title }}
+            **Merged By:** ${{ github.event.pull_request.user.login }}
+          draft: false
+          prerelease: false
           files: |
-            quarkus-app.tar.gz
+            ./quarkus-app.tar.gz
