@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exchange-rate-informer-api
+  labels:
+    app: exchange-rate-informer-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exchange-rate-informer-api
+  template:
+    metadata:
+      labels:
+        app: exchange-rate-informer-api
+    spec:
+      containers:
+        - name: exchange-rate-informer-api
+          image: localhost/exchange-rate-informer-api:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: exchange-rate-informer-secrets
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: exchange-rate-informer-secrets
+                  key: DB_PASSWORD
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: exchange-rate-informer-secrets
+                  key: DB_URL
+            - name: APP_MS_IDENTIFIER
+              valueFrom:
+                secretKeyRef:
+                  name: exchange-rate-informer-secrets
+                  key: APP_MS_IDENTIFIER
